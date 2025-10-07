@@ -1,0 +1,57 @@
+.container{max-width:980px;margin:24px auto;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;color:#0f172a;padding:0 16px}
+:root{--bg:#f5f7fb;--panel:#ffffff;--border:#e6e9f0;--muted:#64748b;--primary:#2563eb;--primary-600:#1d4ed8;--secondary:#10b981;--warning:#f59e0b;--danger:#ef4444;--indigo:#6366f1}
+body{background:linear-gradient(180deg,#f8fafc 0%,#eef2ff 100%)}
+/* Typography */
+h1{margin:8px 0 16px;font-weight:800;letter-spacing:-0.02em;background:linear-gradient(90deg,var(--primary),var(--indigo));-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{margin:6px 0 12px;font-weight:700;color:#111827}
+p{color:var(--muted)}
+/* Layout primitives */
+.controls{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+label{display:flex;gap:8px;align-items:center;color:#0f172a}
+textarea,input{width:100%;max-width:100%;border:1px solid var(--border);border-radius:8px;padding:10px 12px;outline:none;transition:box-shadow .15s ease,border-color .15s ease;background:#fff}
+textarea:focus,input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+section{border:1px solid var(--border);border-radius:14px;padding:16px;margin:18px 0;background:var(--panel);box-shadow:0 8px 30px rgba(31,41,55,.06)}
+.row{display:flex;gap:10px;margin:8px 0;flex-wrap:wrap;align-items:center}
+/* Navbar & hero */
+.navbar{position:sticky;top:0;background:rgba(255,255,255,.8);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--border);border-top-left-radius:12px;border-top-right-radius:12px;padding:10px 12px;margin-bottom:12px}
+.brand{font-weight:800;color:#111827}
+.nav-actions a,.nav-actions .button{margin-left:12px}
+/* Buttons */
+button{padding:10px 14px;cursor:pointer;border-radius:10px;border:1px solid var(--primary);background:var(--primary);color:#fff;font-weight:600;transition:transform .05s ease,filter .15s ease}
+button:hover{filter:brightness(1.05)}
+button:active{transform:translateY(1px)}
+.button{padding:8px 12px;border:1px solid var(--primary);border-radius:10px;color:var(--primary);text-decoration:none;background:#fff;font-weight:600}
+.button.primary{background:var(--primary);color:#fff;border-color:var(--primary)}
+.button.success{border-color:var(--secondary);color:#fff;background:var(--secondary)}
+.button.warning{border-color:var(--warning);color:#fff;background:var(--warning)}
+/* Cards & grids */
+.card{border:1px solid var(--border);border-radius:14px;padding:16px;background:var(--panel);box-shadow:0 10px 30px rgba(2,6,23,.06);transition:transform .15s ease, box-shadow .2s ease}
+.card:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(2,6,23,.1)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+/* Code & tables */
+pre{background:#0b1220;color:#dbeafe;padding:10px;border-radius:10px;overflow:auto;border:1px solid #0f172a}
+table{width:100%;border-collapse:separate;border-spacing:0;margin-top:8px;background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+th,td{border-bottom:1px solid var(--border);padding:10px;text-align:left}
+th{background:#f8fafc;color:#334155}
+/* Links */
+a{color:var(--primary);text-decoration:none}
+a:hover{text-decoration:underline}
+/* Tag/badge */
+.badge{display:inline-block;padding:2px 8px;border-radius:999px;background:#eef2ff;color:#3730a3;font-weight:600;border:1px solid var(--border)}
+/* Grammar issues styling */
+.issues{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+.issue{padding:12px;border:1px solid var(--border);border-radius:12px;background:#f8fafc;display:flex;flex-direction:column;gap:6px;transition:box-shadow .2s ease,transform .1s ease}
+.issue:hover{box-shadow:0 12px 34px rgba(0,0,0,.08);transform:translateY(-1px)}
+.issue .snippet{font-family:ui-monospace,Consolas,Menlo,monospace;color:#0f172a;background:#eef2ff;padding:4px 8px;border-radius:6px;display:inline-block;border:1px solid var(--border)}
+.issue .message{color:#334155}
+.issue .suggestion{color:#065f46;background:#ecfdf5;border:1px solid #d1fae5;border-radius:6px;padding:2px 6px;display:inline-block}
+/* Mic status */
+.status{min-height:20px}
+.status.active{color:#16a34a}
+.status.stopped{color:#ef4444}
+/* Word mistakes */
+.tag{display:inline-block;margin:2px 6px 2px 0;padding:4px 8px;border-radius:999px;border:1px solid var(--border);background:#fff}
+.tag.ok{background:#ecfdf5;border-color:#bbf7d0;color:#065f46}
+.tag.sub{background:#fff7ed;border-color:#fed7aa;color:#9a3412}
+.tag.ins{background:#eff6ff;border-color:#bfdbfe;color:#1e3a8a}
+.tag.del{background:#fff1f2;border-color:#fecdd3;color:#9f1239}

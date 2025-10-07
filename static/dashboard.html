@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lets Learn — Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <style>
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+      }
+      .brand {
+        font-weight: 700;
+        font-size: 20px;
+      }
+      .nav-actions a {
+        margin-left: 12px;
+      }
+      .profile {
+        margin: 8px 0;
+        color: #444;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      canvas {
+        width: 100%;
+        height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="navbar">
+        <div class="brand">Lets Learn</div>
+        <div class="nav-actions">
+          <a href="/" class="button">Home</a>
+          <a href="/grammar" class="button">Grammar</a>
+          <a href="/pronunciation" class="button">Pronunciation</a>
+          <a href="/login" class="button">Switch User</a>
+        </div>
+      </div>
+
+      <div class="profile" id="profile"></div>
+
+      <div class="grid">
+        <div>
+          <h3>Your WER Trend</h3>
+          <canvas id="chart" width="800" height="200"></canvas>
+        </div>
+        <div>
+          <h3>Recent Activity</h3>
+          <table id="progressTable">
+            <thead>
+              <tr>
+                <th>When</th>
+                <th>Lang</th>
+                <th>Issues</th>
+                <th>WER</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const userRaw = localStorage.getItem("lc_user");
+      if (!userRaw) {
+        window.location.href = "/login";
+      }
+      const user = JSON.parse(userRaw || "{}");
+      document.getElementById("profile").textContent = `Logged in as ${
+        user.name
+      }${user.email ? " (" + user.email + ")" : ""}`;
+
+      const chartCanvas = document.getElementById("chart");
+      function drawChart(rows) {
+        const ctx = chartCanvas.getContext("2d");
+        ctx.clearRect(0, 0, chartCanvas.width, chartCanvas.height);
+        if (!rows.length) return;
+        const padding = 24;
+        const w = chartCanvas.width - padding * 2;
+        const h = chartCanvas.height - padding * 2;
+        const values = rows.map((r) => r.wer ?? 0);
+        const max = Math.max(1, ...values);
+        ctx.strokeStyle = "#ccc";
+        ctx.beginPath();
+        ctx.moveTo(padding, padding);
+        ctx.lineTo(padding, padding + h);
+        ctx.lineTo(padding + w, padding + h);
+        ctx.stroke();
+        ctx.strokeStyle = "#1976d2";
+        ctx.beginPath();
+        rows.forEach((r, i) => {
+          const x = padding + (i / (rows.length - 1 || 1)) * w;
+          const y = padding + (1 - values[i] / max) * h;
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+      }
+
+      async function getJSON(url) {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(await res.text());
+        return res.json();
+      }
+
+      async function refresh() {
+        const rows = await getJSON(
+          `/api/progress/results?user_name=${encodeURIComponent(user.name)}`
+        );
+        const tbody = document.querySelector("#progressTable tbody");
+        tbody.innerHTML = "";
+        for (const r of rows) {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `<td>${new Date(
+            r.created_at
+          ).toLocaleString()}</td><td>${r.language}</td><td>${
+            r.grammar_issues_count
+          }</td><td>${r.wer ?? ""}</td>`;
+          tbody.appendChild(tr);
+        }
+        drawChart(rows.slice().reverse());
+      }
+
+      refresh().catch((err) => console.error(err));
+    </script>
+  </body>
+</html>

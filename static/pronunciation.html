@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lets Learn — Pronunciation</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <style>
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+      }
+      .brand {
+        font-weight: 700;
+        font-size: 20px;
+      }
+      .nav-actions a {
+        margin-left: 12px;
+      }
+      .status{margin:6px 0;color:#64748b}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="navbar">
+        <div class="brand">Lets Learn</div>
+        <div class="nav-actions">
+          <a href="/">Home</a>
+          <a href="/dashboard">Dashboard</a>
+          <a href="/login">Login</a>
+        </div>
+      </div>
+
+      <h1>Pronunciation</h1>
+      <div class="controls">
+        <label>Username <input id="username" placeholder="Your name" /></label>
+        <label>Language <input id="language" value="en-US" /></label>
+      </div>
+
+      <section>
+        <label
+          >Reference Text <input id="ref" placeholder="Read this text aloud"
+        /></label>
+        <div class="row">
+          <button id="startReco">Start Recognition</button>
+          <button id="stopReco" disabled>Stop</button>
+          <button id="playRef" class="button">Play Correct Pronunciation</button>
+        </div>
+        <div id="micStatus" class="status"></div>
+        <label>Recognized <input id="hyp" readonly /></label>
+        <div class="row">
+          <button id="scoreBtn">Score Pronunciation</button>
+        </div>
+        <pre id="pronOut"></pre>
+      </section>
+
+      <section>
+        <h2>Pronunciation Mistakes</h2>
+        <div id="wordMistakes" class="issues"></div>
+      </section>
+
+      <section>
+        <h2>Insights</h2>
+        <div id="pronInsights" class="issues"></div>
+      </section>
+    </div>
+    <script src="/static/main.js"></script>
+  </body>
+</html>

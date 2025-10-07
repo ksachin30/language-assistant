@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lets Learn — ASR</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <style>
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+      }
+      .brand {
+        font-weight: 700;
+        font-size: 20px;
+      }
+      .nav-actions a {
+        margin-left: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="navbar">
+        <div class="brand">Lets Learn</div>
+        <div class="nav-actions">
+          <a href="/">Home</a>
+          <a href="/dashboard">Dashboard</a>
+          <a href="/login">Login</a>
+        </div>
+      </div>
+
+      <h1>ASR Upload</h1>
+      <div class="controls">
+        <label>Username <input id="username" placeholder="Your name" /></label>
+        <label>Language <input id="language" value="en-US" /></label>
+      </div>
+
+      <section>
+        <div class="row">
+          <input type="file" id="asrFile" accept="audio/*" />
+          <button id="asrUpload">Transcribe</button>
+        </div>
+        <pre id="asrOut"></pre>
+      </section>
+    </div>
+    <script src="/static/main.js"></script>
+  </body>
+</html>

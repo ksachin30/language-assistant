@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lets Learn — App</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <style>
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+      }
+      .brand {
+        font-weight: 700;
+        font-size: 20px;
+      }
+      .nav-actions a {
+        margin-left: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="navbar">
+        <div class="brand">Lets Learn</div>
+        <div class="nav-actions">
+          <a href="/">Home</a>
+          <a href="/dashboard">Dashboard</a>
+          <a href="/login">Login</a>
+        </div>
+      </div>
+      <h1>AI Language Learning Assistant</h1>
+      <div class="controls">
+        <label>Username <input id="username" placeholder="Your name" /></label>
+        <label>Language <input id="language" value="en-US" /></label>
+      </div>
+
+      <section id="grammar">
+        <h2>Grammar Checker</h2>
+        <textarea
+          id="text"
+          rows="4"
+          placeholder="Type or paste text..."
+        ></textarea>
+        <button id="checkBtn">Check Grammar</button>
+        <div id="grammarOut" class="issues"></div>
+      </section>
+
+      <section id="pronunciation">
+        <h2>Pronunciation (Speech to Text WER)</h2>
+        <label
+          >Reference Text <input id="ref" placeholder="Read this text aloud"
+        /></label>
+        <div class="row">
+          <button id="startReco">Start Recognition</button>
+          <button id="stopReco" disabled>Stop</button>
+        </div>
+        <label>Recognized <input id="hyp" readonly /></label>
+        <button id="scoreBtn">Score Pronunciation</button>
+        <pre id="pronOut"></pre>
+      </section>
+
+      <section id="asr">
+        <h2>ASR (Upload Audio)</h2>
+        <div class="row">
+          <input type="file" id="asrFile" accept="audio/*" />
+          <button id="asrUpload">Transcribe</button>
+        </div>
+        <pre id="asrOut"></pre>
+      </section>
+
+      <section id="phonemes">
+        <h2>Phoneme Tools</h2>
+        <div class="row">
+          <input id="phonInput" placeholder="Text to phonemize" />
+          <button id="phonBtn">To Phonemes</button>
+        </div>
+        <pre id="phonOut"></pre>
+      </section>
+
+      <section id="alignment">
+        <h2>Phoneme Alignment</h2>
+        <div class="row">
+          <input id="refPhon" placeholder="ref phonemes (space-separated)" />
+        </div>
+        <div class="row">
+          <input id="hypPhon" placeholder="hyp phonemes (space-separated)" />
+          <button id="alignBtn">Align</button>
+        </div>
+        <pre id="alignOut"></pre>
+      </section>
+
+      <section>
+        <h2>Progress</h2>
+        <button id="refreshProgress">Refresh</button>
+        <table id="progressTable">
+          <thead>
+            <tr>
+              <th>When</th>
+              <th>Lang</th>
+              <th>Issues</th>
+              <th>WER</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+    </div>
+
+    <script src="/static/main.js"></script>
+  </body>
+</html>
